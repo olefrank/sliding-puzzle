@@ -202,6 +202,7 @@ function startGame() {
 
 function stopGame() {
     stopTimer();
+    $("span.piece").off("click");
     $(".piece").css("border", "none");
     $(".piece").css("padding", "1px");
     $(".piece0").addClass("piece9").removeClass("piece0");
