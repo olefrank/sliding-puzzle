@@ -18,7 +18,13 @@ $(document).ready(function() {
     timerText = $("#time");
     moveCountText = $("#moveCount");
 
-    initPuzzle(numPieces);
+    // first show solution
+    var solutionArr = createSolutionArray(9);
+    numRows = 3;
+    solution = listToMatrix(solutionArr, numRows);
+    var html = createHTMLPuzzle(solution);
+    drawPuzzle(html);
+    stopGame();
 
     // button handlers
     $("a.grid_3").on("click", function() {
@@ -56,7 +62,6 @@ function initPuzzle(numPieces) {
     updateMoveCountText(moveCount);
     $(".piece").css("border", "1px solid black");
     $(".piece").css("padding", "0");
-    $(".piece9").addClass("piece0").removeClass("piece9");
 
     if (!isFinish) {
         $("span.piece").on("click", function() {
@@ -119,7 +124,7 @@ function createSolutionArray(numPieces) {
     return puzzle;
 }
 
-function createHTMLPuzzle(puzzle) {
+function createHTMLPuzzle(puzzleArr) {
     var html = "";
     var colClass = ""
     var pieceClass = "";
@@ -129,18 +134,18 @@ function createHTMLPuzzle(puzzle) {
     else if (numRows === 4) { colClass = "fourCol"; }
     else { colClass = "fiveCol"; }
 
-    for (var i = 0; i < puzzle.length; i++) {
+    for (var i = 0; i < puzzleArr.length; i++) {
         html += "<div>"
         
-        for (var j = 0; j < puzzle[i].length; j++) {
-            pieceClass = (puzzle[i][j].text === "")
+        for (var j = 0; j < puzzleArr[i].length; j++) {
+            pieceClass = (puzzleArr[i][j].text === "")
                 ? "piece0"
-                : pieceClass = "piece" + puzzle[i][j].id;
+                : pieceClass = "piece" + puzzleArr[i][j].id;
 
             html += "<span class='unselectable piece" +
                         " " + colClass +
                         " " + pieceClass +
-                        "'>" + puzzle[i][j].text +
+                        "'>" + puzzleArr[i][j].text +
                     "</span>";
         }
         html += "</div>";
