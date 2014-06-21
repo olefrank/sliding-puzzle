@@ -69,6 +69,7 @@ body {
 
 .solved {
     border: none;
+    padding: 1px;
 }
 
 .piece0 { background: repeating-linear-gradient(-45deg, #222, #222 10px, #444 10px, #444 20px); }
@@ -144,12 +145,11 @@ body {
 
 a.button {
     background-image: -moz-linear-gradient(top, #ffffff, #dbdbdb);
-    background-image: -webkit-gradient(linear,left top,left bottom,
-    color-stop(0, #ffffff),color-stop(1, #dbdbdb));
-    filter: progid:DXImageTransform.Microsoft.gradient
-    (startColorStr='#ffffff', EndColorStr='#dbdbdb');
-    -ms-filter: "progid:DXImageTransform.Microsoft.gradient
-    (startColorStr='#ffffff', EndColorStr='#dbdbdb')";
+    background-image: -webkit-gradient(
+        linear,left top,left bottom,color-stop(0, #ffffff),color-stop(1, #dbdbdb)
+    );
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#ffffff', EndColorStr='#dbdbdb');
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#ffffff', EndColorStr='#dbdbdb')";
 
     border: 1px solid #fff;
     padding: 5px 10px;
@@ -170,22 +170,19 @@ a.button:hover {
     background-image: -moz-linear-gradient(top, #ffffff, #eeeeee);
     background-image: -webkit-gradient(linear,left top,left bottom,
     color-stop(0, #ffffff),color-stop(1, #eeeeee));
-    filter: progid:DXImageTransform.Microsoft.gradient
-    (startColorStr='#ffffff', EndColorStr='#eeeeee');
-    -ms-filter: "progid:DXImageTransform.Microsoft.gradient
-    (startColorStr='#ffffff', EndColorStr='#eeeeee')";
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#ffffff', EndColorStr='#eeeeee');
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#ffffff', EndColorStr='#eeeeee')";
     color: #000;
     display: block;
 }
 
 a.button:active {
     background-image: -moz-linear-gradient(top, #dbdbdb, #ffffff);
-    background-image: -webkit-gradient(linear,left top,left bottom,
-    color-stop(0, #dbdbdb),color-stop(1, #ffffff));
-    filter: progid:DXImageTransform.Microsoft.gradient
-    (startColorStr='#dbdbdb', EndColorStr='#ffffff');
-    -ms-filter: "progid:DXImageTransform.Microsoft.gradient
-    (startColorStr='#dbdbdb', EndColorStr='#ffffff')";
+    background-image: -webkit-gradient(
+        linear,left top,left bottom,color-stop(0, #dbdbdb),color-stop(1, #ffffff)
+    );
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#dbdbdb', EndColorStr='#ffffff');
+    -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorStr='#dbdbdb', EndColorStr='#ffffff')";
     text-shadow: 0px -1px 0 rgba(255, 255, 255, 0.5);
     margin-top: 1px;
 }
