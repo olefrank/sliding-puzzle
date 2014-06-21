@@ -161,7 +161,7 @@ slidingPuzzle = (function () {
 
     function createHTML(puzzleArr) {
         var html = "";
-        var colClass = ""
+        var colClass = "";
         var pieceClass = "";
 
         // css column class
@@ -170,7 +170,7 @@ slidingPuzzle = (function () {
         else { colClass = "fiveCol"; }
 
         for (var i = 0; i < puzzleArr.length; i++) {
-            html += "<div>"
+            html += "<div>";
 
             for (var j = 0; j < puzzleArr[i].length; j++) {
                 pieceClass = (puzzleArr[i][j].text === "")
@@ -229,16 +229,15 @@ slidingPuzzle = (function () {
         var top = emptyPos.top - curPos.top;
 
         // moving piece
-        TweenLite.to(clickedElement, .2, {
+        TweenLite.to(clickedElement,.2, {
             left:"+=" + left + "px",
-            top: "+=" + top + "px",
-            ease:Strong.easeOut
+            top: "+=" + top + "px"
         });
 
         // empty piece
         TweenLite.to(emptyElement, 0, {
-            left:"+=" + -left + "px",
-            top: "+=" + -top + "px"
+            left:"-=" + left + "px",
+            top: "-=" + top + "px"
         });
     }
 
