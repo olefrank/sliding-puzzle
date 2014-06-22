@@ -1,9 +1,8 @@
 # Sliding Puzzle
 _Current version: 1.0_
 
-Small sliding puzzle game built with jQuery. I made it just for fun!
+Small sliding puzzle game built with jQuery. Made just for fun!
+Try demo [here](http://sliding-puzzle.olefrank.dk)
 
-## Inspiration
+## Backgrouund
 [http://www.cs.bham.ac.uk/~mdr/teaching/modules04/java2/TilesSolvability.html](http://www.cs.bham.ac.uk/~mdr/teaching/modules04/java2/TilesSolvability.html)
-
-<a href="http://www.cs.bham.ac.uk/~mdr/teaching/modules04/java2/TilesSolvability.html" target="_blank">http://www.cs.bham.ac.uk/~mdr/teaching/modules04/java2/TilesSolvability.html</a>
