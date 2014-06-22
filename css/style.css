@@ -5,6 +5,10 @@ body {
     background: black;
 }
 #container {
+    position: relative;
+}
+
+.puzzle-container {
     width: 337px;
     margin: 50px auto;
     padding: 40px;
@@ -139,11 +143,6 @@ body {
 
 
 /* BUTTONS */
-
-#menu {
-    margin-top: 20px;
-}
-
 a.button {
     background-image: -moz-linear-gradient(top, #ffffff, #dbdbdb);
     background-image: -webkit-gradient(
@@ -214,6 +213,24 @@ a.button.icon.grid_4 span {
 
 a.button.icon.grid_5 span {
     background-image: url(../img/grid_5x5.png);
+}
+
+.start-help {
+    position:absolute;
+    bottom: -100px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    width: 337px;
+    padding: 20px 40px;
+    color: white;
+    background-color: #333;
+    opacity: 0;
+}
+
+.start-help h3 {
+    margin: 0 0 5px 0;
+    font-weight: normal;
 }
 
 .clearfix {

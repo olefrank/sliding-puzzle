@@ -9,43 +9,50 @@
 </head>
 <body>
 <div id="container">
+    <div class="puzzle-container">
 
-    <!-- top panel -->
-    <div class="timeAndMoves">
-        <div class="time">
-            <p id="timeLabel" class="label"></p>
-            <p id="time"></p>
+        <!-- top panel -->
+        <div class="timeAndMoves">
+            <div class="time">
+                <p id="timeLabel" class="label"></p>
+                <p id="time"></p>
+            </div>
+            <div class="moveCount">
+                <p id="moveCountLabel" class="label"></p>
+                <p id="moveCount"></p>
+            </div>
         </div>
-        <div class="moveCount">
-            <p id="moveCountLabel" class="label"></p>
-            <p id="moveCount"></p>
-        </div>
+
+        <!-- puzzle board -->
+        <div id="puzzle"></div>
+
     </div>
 
-    <!-- puzzle board -->
-    <div id="puzzle"></div>
-
-    <!-- bottom buttons -->
-    <div id="menu">
-        <a data-num-pieces="9" class="button icon grid_3 btn_start" href="#"><span>Easy</span></a>
-        <a data-num-pieces="16" class="button icon grid_4 btn_start" href="#"><span>Medium</span></a>
-        <a data-num-pieces="25" class="button icon grid_5 btn_start" href="#"><span>Hard</span></a>
+    <div class="start-help">
+        <h3>Click to start</h3>
+       <div>
+            <a data-num-pieces="9" class="button icon grid_3 btn_start" href="#"><span>Easy</span></a>
+            <a data-num-pieces="16" class="button icon grid_4 btn_start" href="#"><span>Medium</span></a>
+            <a data-num-pieces="25" class="button icon grid_5 btn_start" href="#"><span>Hard</span></a>
+        </div>
     </div>
 
     <div class="clearfix"></div>
 
-</div>
+</div> <!-- END container -->
 
     <script>
 
+        // init game on document ready
         $(document).ready(function() {
             slidingPuzzle.startingState(9);
 
             // start button handler
             $(".btn_start").on("click", function() {
                 var numPieces = $(this).data("num-pieces");
-                slidingPuzzle.startGame(numPieces);
+                slidingPuzzle.startGame(numPieces, true);
             });
+
         });
 
     </script>

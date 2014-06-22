@@ -25,18 +25,8 @@ slidingPuzzle = (function () {
         puzzleElement;
 
     function startingState(numPieces) {
-        // init
-        initPuzzle(numPieces);
-
-        // show solution at startup
-        var solutionArr = createSolutionArray(numPieces);
-        numRows = Math.sqrt(numPieces);
-        solution = listToMatrix(solutionArr, numRows);
-        var html = createHTML(solution);
-        drawPuzzle(html);
-
-        $(".piece0").addClass("piece9").removeClass("piece0");
-        $(".piece").addClass("solved");
+        startGame(9, false);
+        stopGame();
     }
 
     function initPuzzle(numPieces) {
@@ -57,19 +47,27 @@ slidingPuzzle = (function () {
         clearTimer();
     }
 
-    function startGame(numPieces) {
+    function startGame(numPieces, shufflePieces) {
         // init
         initPuzzle(numPieces);
 
         // generate puzzle
         var generated = generatePuzzle(numPieces);
         solution = generated.solution;
-        puzzle = generated.puzzle;
+
+        if (shufflePieces) {
+            puzzle = generated.puzzle;
+        }
+        else {
+            puzzle = generated.solution;
+        }
 
         var html = createHTML(puzzle);
         drawPuzzle(html);
 
         // update GUI
+        TweenMax.to($(".start-help"),.5, {opacity:0, bottom: -100, ease: "Strong.easeIn"});
+
         $("#timeLabel").text("Time");
         updateTimerText(time);
         $("#moveCountLabel").text("Moves");
@@ -106,6 +104,8 @@ slidingPuzzle = (function () {
         if (numRows === 3) $(".piece0").addClass("piece9").removeClass("piece0");
         else if (numRows === 4) $(".piece0").addClass("piece16").removeClass("piece0");
         else if (numRows === 5) $(".piece0").addClass("piece25").removeClass("piece0");
+
+        TweenMax.to($(".start-help"),.4, {opacity:1, bottom: 0, delay:.5, ease: "Strong.easeOut"});
     }
 
     function startTimer() {
