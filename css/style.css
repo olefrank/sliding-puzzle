@@ -224,7 +224,7 @@ a.button.icon.grid_5 span {
     width: 337px;
     padding: 20px 40px;
     color: white;
-    background-color: #333;
+    background-color: rgba(51,51,51,.8);
     opacity: 0;
 }
 

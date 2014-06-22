@@ -79,7 +79,7 @@ slidingPuzzle = (function () {
 
         // piece click handler
         if (!isFinish) {
-            $("span.piece").on("click", function() {
+            $("span.piece").on("mousedown touch", function() {
                 clickedElement = $(this);
 
                 var piece = this.innerHTML;
@@ -97,7 +97,7 @@ slidingPuzzle = (function () {
         clearTimer();
 
         // remove click handler
-        $("span.piece").off("click");
+        $("span.piece").off("mousedown touch");
 
         // update GUI
         $(".piece").addClass("solved");
@@ -229,9 +229,10 @@ slidingPuzzle = (function () {
         var top = emptyPos.top - curPos.top;
 
         // moving piece
-        TweenLite.to(clickedElement,.2, {
+        TweenLite.to(clickedElement,.3, {
             left:"+=" + left + "px",
-            top: "+=" + top + "px"
+            top: "+=" + top + "px",
+            ease: "Strong.easeOut"
         });
 
         // empty piece

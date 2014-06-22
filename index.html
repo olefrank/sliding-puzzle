@@ -1,11 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=0.8, maximum-scale=0.8, user-scalable=no">
     <title>Sliding Puzzle</title>
     <link rel="stylesheet" href="css/style.css"/>
-    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
-    <script src="script/script.js"></script>
 </head>
 <body>
 <div id="container">
@@ -41,10 +39,15 @@
 
 </div> <!-- END container -->
 
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.0/fastclick.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
+    <script src="script/script.js"></script>
     <script>
 
-        // init game on document ready
-        $(document).ready(function() {
+        (function() {
+            FastClick.attach(document.body);
+
             slidingPuzzle.startingState(9);
 
             // start button handler
@@ -52,8 +55,7 @@
                 var numPieces = $(this).data("num-pieces");
                 slidingPuzzle.startGame(numPieces, true);
             });
-
-        });
+        })();
 
     </script>
 </body>
