@@ -22,7 +22,13 @@ slidingPuzzle = (function () {
         emptyElement,
         timerText,
         moveCountText,
-        puzzleElement;
+        puzzleElement,
+        cellSize,
+        puzzleSize;
+
+    window.addEventListener("load", updateSizes, false);
+    window.addEventListener("resize", updateSizes, false);
+
 
     function startingState(numPieces) {
         startGame(9, false);
@@ -64,8 +70,8 @@ slidingPuzzle = (function () {
 
         var html = createHTML(puzzle);
         drawPuzzle(html);
+        updateSizes();
 
-        // update GUI
         TweenMax.to($(".start-help"),.5, {opacity:0, bottom: -100, ease: "Strong.easeIn"});
 
         $("#timeLabel").text("Time");
@@ -79,7 +85,8 @@ slidingPuzzle = (function () {
 
         // piece click handler
         if (!isFinish) {
-            $("span.piece").on("mousedown touch", function() {
+            //$("span.piece").on("mousedown touch", function() {
+            $(".piece").on("vmousedown", function(e) {
                 clickedElement = $(this);
 
                 var piece = this.innerHTML;
@@ -93,11 +100,22 @@ slidingPuzzle = (function () {
         }
     }
 
+    function updateSizes() {
+        // update GUI
+        cellSize = $(".piece").css("width");
+        puzzleSize = $("#puzzle>div:first-of-type").css("width");
+        $(".piece").css({
+            "height": cellSize,
+            "background-size": puzzleSize
+        });
+    }
+
     function stopGame() {
         clearTimer();
 
         // remove click handler
-        $("span.piece").off("mousedown touch");
+        //$("span.piece").off("mousedown touch");
+        $(".piece").off("vmousedown");
 
         // update GUI
         $(".piece").addClass("solved");
@@ -165,29 +183,75 @@ slidingPuzzle = (function () {
         var pieceClass = "";
 
         // css column class
-        if (numRows === 3) { colClass = "threeCol"; }
-        else if (numRows === 4) { colClass = "fourCol"; }
-        else { colClass = "fiveCol"; }
+        if (numRows === 3) {
+            colClass = "threeCol";
+            html += "<div class='ui-grid-b'>";
+        }
+        else if (numRows === 4) {
+            colClass = "fourCol";
+            html += "<div class='ui-grid-c'>";
+        }
+        else {
+            colClass = "fiveCol";
+            html += "<div class='ui-grid-d'>";
+        }
 
+        var uiClassArr = ["ui-block-a", "ui-block-b", "ui-block-c", "ui-block-d", "ui-block-e"];
+        var uiIndex = 0;
         for (var i = 0; i < puzzleArr.length; i++) {
-            html += "<div>";
 
             for (var j = 0; j < puzzleArr[i].length; j++) {
+
                 pieceClass = (puzzleArr[i][j].text === "")
                     ? "piece0"
                     : pieceClass = "piece" + puzzleArr[i][j].id;
 
-                html += "<span class='unselectable piece" +
+                uiIndex = j % numRows;
+
+                html += "<div class='unselectable piece" +
                     " " + colClass +
                     " " + pieceClass +
+                    " " + uiClassArr[uiIndex] +
+                    " hideText" +
                     "'>" + puzzleArr[i][j].text +
-                    "</span>";
+                    "</div>";
             }
-            html += "</div>";
         }
+
+        html += "</div>";
 
         return html;
     }
+
+//    function createHTML(puzzleArr) {
+//        var html = "";
+//        var colClass = "";
+//        var pieceClass = "";
+//
+//        // css column class
+//        if (numRows === 3) { colClass = "threeCol"; }
+//        else if (numRows === 4) { colClass = "fourCol"; }
+//        else { colClass = "fiveCol"; }
+//
+//        for (var i = 0; i < puzzleArr.length; i++) {
+//            html += "<div>";
+//
+//            for (var j = 0; j < puzzleArr[i].length; j++) {
+//                pieceClass = (puzzleArr[i][j].text === "")
+//                    ? "piece0"
+//                    : pieceClass = "piece" + puzzleArr[i][j].id;
+//
+//                html += "<span class='unselectable piece" +
+//                    " " + colClass +
+//                    " " + pieceClass +
+//                    "'>" + puzzleArr[i][j].text +
+//                    "</span>";
+//            }
+//            html += "</div>";
+//        }
+//
+//        return html;
+//    }
 
     function drawPuzzle(html) {
         puzzleElement.empty();
@@ -222,6 +286,7 @@ slidingPuzzle = (function () {
 
     function animatePieces() {
         emptyElement = $(".piece0");
+
         var emptyPos = emptyElement.position();
         var curPos = clickedElement.position();
 
