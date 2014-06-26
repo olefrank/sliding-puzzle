@@ -4,12 +4,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <title>Sliding Puzzle</title>
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.css" />
-    <link rel="stylesheet" href="css/style.css"/>
+    <link rel="stylesheet" href="css/base.css"/>
+    <link rel="stylesheet" media="screen and (min-device-width: 1280px)" href="css/desktop.css" />
+    <link rel="stylesheet" media="screen and (max-device-width: 1279px)" href="css/mobile.css" />
 </head>
 <body>
 <div id="container" data-role="content">
-
-    <div id="puzzle"></div>
 
     <div class="puzzle-container">
 
@@ -32,14 +32,14 @@
 
     <div class="start-help">
         <h3>Click to start</h3>
-       <div>
-            <a data-num-pieces="9" class="button icon grid_3 btn_start" href="#"><span>Easy</span></a>
-            <a data-num-pieces="16" class="button icon grid_4 btn_start" href="#"><span>Medium</span></a>
-            <a data-num-pieces="25" class="button icon grid_5 btn_start" href="#"><span>Hard</span></a>
+        <div class="ui-grid-b">
+            <div class="ui-block-a"><a href="#" data-num-pieces="9" class="btn_start ui-icon-easy ui-btn ui-shadow ui-corner-all ui-mini">Easy</a></div>
+            <div class="ui-block-b"><a href="#" data-num-pieces="16" class="btn_start ui-icon-medium ui-btn ui-shadow ui-corner-all ui-mini">Medium</a></div>
+            <div class="ui-block-c"><a href="#" data-num-pieces="25" class="btn_start ui-icon-hard ui-btn ui-shadow ui-corner-all ui-mini">Hard</a></div>
         </div>
-    </div>
+  </div>
 
-    <div class="clearfix"></div>
+  <div class="clearfix"></div>
 
 </div> <!-- END container -->
 

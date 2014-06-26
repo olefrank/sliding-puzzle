@@ -223,36 +223,6 @@ slidingPuzzle = (function () {
         return html;
     }
 
-//    function createHTML(puzzleArr) {
-//        var html = "";
-//        var colClass = "";
-//        var pieceClass = "";
-//
-//        // css column class
-//        if (numRows === 3) { colClass = "threeCol"; }
-//        else if (numRows === 4) { colClass = "fourCol"; }
-//        else { colClass = "fiveCol"; }
-//
-//        for (var i = 0; i < puzzleArr.length; i++) {
-//            html += "<div>";
-//
-//            for (var j = 0; j < puzzleArr[i].length; j++) {
-//                pieceClass = (puzzleArr[i][j].text === "")
-//                    ? "piece0"
-//                    : pieceClass = "piece" + puzzleArr[i][j].id;
-//
-//                html += "<span class='unselectable piece" +
-//                    " " + colClass +
-//                    " " + pieceClass +
-//                    "'>" + puzzleArr[i][j].text +
-//                    "</span>";
-//            }
-//            html += "</div>";
-//        }
-//
-//        return html;
-//    }
-
     function drawPuzzle(html) {
         puzzleElement.empty();
         puzzleElement.append(html);
