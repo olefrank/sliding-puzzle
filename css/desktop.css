@@ -1,7 +1,7 @@
 
 .puzzle-container {
     width: 337px;
-    margin: 50px auto;
+    margin: 0 auto;
     padding: 40px;
 }
 
@@ -33,16 +33,7 @@
 }
 
 .start-help {
-    position:absolute;
-    bottom: -100px;
-    left: 0;
-    right: 0;
-    margin: 0 auto;
     width: 337px;
-    padding: 20px 40px;
-    color: white;
-    background-color: rgba(51,51,51,.8);
-    opacity: 0;
 }
 
 .start-help h3 {

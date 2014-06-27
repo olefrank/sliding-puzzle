@@ -31,7 +31,7 @@
     </div>
 
     <div class="start-help">
-        <h3>Click to start</h3>
+        <h3>Click level to start</h3>
         <div class="ui-grid-b">
             <div class="ui-block-a"><a href="#" data-num-pieces="9" class="btn_start ui-icon-easy ui-btn ui-shadow ui-corner-all ui-mini">Easy</a></div>
             <div class="ui-block-b"><a href="#" data-num-pieces="16" class="btn_start ui-icon-medium ui-btn ui-shadow ui-corner-all ui-mini">Medium</a></div>
@@ -45,14 +45,11 @@
 
     <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script src="https://code.jquery.com/mobile/1.4.2/jquery.mobile-1.4.2.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.0/fastclick.min.js"></script>
-    <script src="http://cdnjs.cloudflare.com/ajax/libs/gsap/latest/TweenMax.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery.transit/0.9.9/jquery.transit.min.js"></script>
     <script src="script/script.js"></script>
     <script>
 
         (function() {
-            FastClick.attach(document.body);
-
             slidingPuzzle.startingState(9);
 
             // start button handler

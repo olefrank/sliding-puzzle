@@ -72,7 +72,12 @@ slidingPuzzle = (function () {
         drawPuzzle(html);
         updateSizes();
 
-        TweenMax.to($(".start-help"),.5, {opacity:0, bottom: -100, ease: "Strong.easeIn"});
+        $(".start-help").transition({
+            bottom: -100,
+            opacity: 0,
+            duration: 300,
+            easing: 'snap'
+        });
 
         $("#timeLabel").text("Time");
         updateTimerText(time);
@@ -85,7 +90,6 @@ slidingPuzzle = (function () {
 
         // piece click handler
         if (!isFinish) {
-            //$("span.piece").on("mousedown touch", function() {
             $(".piece").on("vmousedown", function(e) {
                 clickedElement = $(this);
 
@@ -100,21 +104,10 @@ slidingPuzzle = (function () {
         }
     }
 
-    function updateSizes() {
-        // update GUI
-        cellSize = $(".piece").css("width");
-        puzzleSize = $("#puzzle>div:first-of-type").css("width");
-        $(".piece").css({
-            "height": cellSize,
-            "background-size": puzzleSize
-        });
-    }
-
     function stopGame() {
         clearTimer();
 
         // remove click handler
-        //$("span.piece").off("mousedown touch");
         $(".piece").off("vmousedown");
 
         // update GUI
@@ -123,7 +116,22 @@ slidingPuzzle = (function () {
         else if (numRows === 4) $(".piece0").addClass("piece16").removeClass("piece0");
         else if (numRows === 5) $(".piece0").addClass("piece25").removeClass("piece0");
 
-        TweenMax.to($(".start-help"),.4, {opacity:1, bottom: 0, delay:.5, ease: "Strong.easeOut"});
+        $(".start-help").transition({
+            bottom: 0,
+            opacity: 1,
+            duration: 500,
+            easing: 'snap'
+        });
+    }
+
+    function updateSizes() {
+        // update GUI
+        cellSize = $(".piece").css("width");
+        puzzleSize = $("#puzzle>div:first-of-type").css("width");
+        $(".piece").css({
+            "height": cellSize,
+            "background-size": puzzleSize
+        });
     }
 
     function startTimer() {
@@ -264,16 +272,18 @@ slidingPuzzle = (function () {
         var top = emptyPos.top - curPos.top;
 
         // moving piece
-        TweenLite.to(clickedElement,.3, {
-            left:"+=" + left + "px",
-            top: "+=" + top + "px",
-            ease: "Strong.easeOut"
+        clickedElement.transition({
+            left: "+=" + left,
+            top: "+=" + top,
+            duration: 300,
+            easing: 'snap'
         });
 
         // empty piece
-        TweenLite.to(emptyElement, 0, {
-            left:"-=" + left + "px",
-            top: "-=" + top + "px"
+        emptyElement.transition({
+            left: "-=" + left,
+            top: "-=" + top,
+            duration: 0
         });
     }
 
