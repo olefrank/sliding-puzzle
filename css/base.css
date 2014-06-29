@@ -40,7 +40,7 @@ body {
 
 .start-help {
     position:absolute;
-    bottom: -100px;
+    bottom: 0;
     left: 0;
     right: 0;
     margin: 0 auto;
@@ -56,6 +56,8 @@ body {
 }
 
 .piece {
+    -webkit-transform: translate3d(0,0,0);
+    transform: translate3d(0,0,0);
     position: relative;
     background-image: url("../img/smiley.jpg");
     border: 1px solid #777;

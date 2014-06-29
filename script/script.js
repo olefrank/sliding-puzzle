@@ -24,11 +24,10 @@ slidingPuzzle = (function () {
         moveCountText,
         puzzleElement,
         cellSize,
-        puzzleSize;
+        puzzleSize,
+        isAnimating;
 
     window.addEventListener("load", updateSizes, false);
-    window.addEventListener("resize", updateSizes, false);
-
 
     function startingState(numPieces) {
         startGame(9, false);
@@ -75,8 +74,8 @@ slidingPuzzle = (function () {
         $(".start-help").transition({
             bottom: -100,
             opacity: 0,
-            duration: 300,
-            easing: 'snap'
+            duration: 500,
+            easing: 'ease'
         });
 
         $("#timeLabel").text("Time");
@@ -97,7 +96,7 @@ slidingPuzzle = (function () {
                 var p = findPiece(piece);
                 var n = findEmptyNeighbour(p);
 
-                if (n !== null) {
+                if (n !== null && !isAnimating) {
                     move(p, n);
                 }
             });
@@ -117,10 +116,11 @@ slidingPuzzle = (function () {
         else if (numRows === 5) $(".piece0").addClass("piece25").removeClass("piece0");
 
         $(".start-help").transition({
+            delay: 500,
             bottom: 0,
             opacity: 1,
             duration: 500,
-            easing: 'snap'
+            easing: 'ease'
         });
     }
 
@@ -263,6 +263,7 @@ slidingPuzzle = (function () {
     }
 
     function animatePieces() {
+        isAnimating = true;
         emptyElement = $(".piece0");
 
         var emptyPos = emptyElement.position();
@@ -276,7 +277,10 @@ slidingPuzzle = (function () {
             left: "+=" + left,
             top: "+=" + top,
             duration: 300,
-            easing: 'snap'
+            easing: 'snap',
+            complete: function() {
+                isAnimating = false;
+            }
         });
 
         // empty piece
@@ -338,6 +342,49 @@ slidingPuzzle = (function () {
         return result;
     }
 
+    function isSolutionValid(puzzleArr) {
+        var gridWidth,
+            isGridWidthEven,
+            numInversions = 0,
+            isNumInversionsEven,
+            rowNumber = numRows,
+            isBlankOnEvenRow = false;
+
+        // is grid width even
+        gridWidth = Math.sqrt(puzzleArr.length);
+        isGridWidthEven = (gridWidth % 2) === 0;
+
+        // is number of inversions even
+        for (var i = 0; i < puzzleArr.length; i++) {
+
+            if (i !== 0 && i % gridWidth === 0) {
+                rowNumber--;
+            }
+
+            // is blank piece on even row from bottom
+            if ( puzzleArr[i].text === "" && (rowNumber % 2 === 0) ) {
+                isBlankOnEvenRow = true;
+            }
+
+            for (var j = i; j < puzzleArr.length; j++) {
+                var num1 = parseInt(puzzleArr[i].text);
+                var num2 = parseInt(puzzleArr[j].text);
+
+                if (num1 > num2) {
+                    numInversions++;
+                }
+            }
+        }
+        isNumInversionsEven = (numInversions % 2) === 0;
+
+        //console.log("isGridWidthEven: " + isGridWidthEven + " - isNumInversionsEven: " + isNumInversionsEven + "(" + numInversions + ") - isBlankOnEvenRow: " +isBlankOnEvenRow);
+
+        return (
+            (!isGridWidthEven && isNumInversionsEven)  ||
+            ( isGridWidthEven && (!isBlankOnEvenRow === isNumInversionsEven) )
+        );
+    }
+
     function updateTimerText(secs) {
         timerText.html(secsToMMSS(secs));
     }
@@ -371,47 +418,6 @@ slidingPuzzle = (function () {
     function shuffleArray(arr) {
         for (var j, x, i = arr.length; i; j = Math.floor(Math.random() * i), x = arr[--i], arr[i] = arr[j], arr[j] = x);
         return arr;
-    }
-
-    function isSolutionValid(puzzleArr) {
-        var gridWidth,
-            isGridWidthEven,
-            numInversions = 0,
-            isNumInversionsEven,
-            rowNumber = numRows,
-            isBlankOnEvenRow = false;
-
-        // is grid width even
-        gridWidth = Math.sqrt(puzzleArr.length);
-        isGridWidthEven = (gridWidth % 2) === 0;
-
-        // is number of inversions even
-        for (var i = 0; i < puzzleArr.length; i++) {
-
-            // is blank piece on even row from bottom
-           if ( puzzleArr[i].text === "" && (rowNumber % 2 !== 0) ) {
-                isBlankOnEvenRow = true;
-            }
-
-            if (i % gridWidth === 0) {
-                rowNumber--;
-            }
-
-            for (var j = i; j < puzzleArr.length; j++) {
-                var num1 = parseInt(puzzleArr[i].text);
-                var num2 = parseInt(puzzleArr[j].text);
-
-                if (num1 > num2) {
-                    numInversions++;
-                }
-            }
-        }
-        isNumInversionsEven = (numInversions % 2) === 0;
-
-        return (
-            (!isGridWidthEven && isNumInversionsEven)  ||
-                ( isGridWidthEven && (!isBlankOnEvenRow == isNumInversionsEven) )
-            );
     }
 
     function checkIfPuzzleIsSquare(numRows) {
